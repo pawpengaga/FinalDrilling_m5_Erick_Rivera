@@ -11,6 +11,10 @@ public class Horoscopo {
   private LocalDate fecha_inicio;
   private LocalDate fecha_final;
 
+  public Horoscopo(){
+    // Constructor vacio
+  }
+
   /**
    * @param horoscopo Un animal
    * @param fecha_inicio Autoexplicativo
@@ -32,6 +36,18 @@ public class Horoscopo {
 
   public LocalDate getFecha_final() {
     return fecha_final;
+  }
+
+  public void setHoroscopo(String horoscopo) {
+    this.horoscopo = horoscopo;
+  }
+
+  public void setFecha_inicio(LocalDate fecha_inicio) {
+    this.fecha_inicio = fecha_inicio;
+  }
+
+  public void setFecha_final(LocalDate fecha_final) {
+    this.fecha_final = fecha_final;
   }
 
   // Metodo toString generado de manera temporal para pruebas internas

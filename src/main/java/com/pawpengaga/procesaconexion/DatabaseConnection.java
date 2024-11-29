@@ -15,9 +15,10 @@ public class DatabaseConnection {
   private DatabaseConnection(){
     
     try {
+      
       Class.forName("org.postgresql.Driver");
-
-      cnx = DriverManager.getConnection("jdbc:postgresql:"+ dbName +"?user="+ dbUser +"&password=" + dbPass);
+      cnx = DriverManager.getConnection("jdbc:postgresql:final_drilling_m5?user=postgres&password=12345678");
+      // cnx = DriverManager.getConnection("jdbc:postgresql:"+ dbName +"?user="+ dbUser +"&password=" + dbPass);
 
       System.out.println("Cargo el driver...");
 
@@ -44,8 +45,9 @@ public class DatabaseConnection {
     return cnx;
   }
 
-  public static void main(String[] args) {
-    System.out.println("Se paso por aqui");
-    DatabaseConnection.getConnection();
-   }
+  // Eliminar despues...
+  // public static void main(String[] args) {
+  //   System.out.println("Se paso por aqui");
+  //   DatabaseConnection.getConnection();
+  //  }
 }
