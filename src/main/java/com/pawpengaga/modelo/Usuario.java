@@ -25,6 +25,14 @@ public class Usuario {
     this.animal = animal; // Sera definido a partir de un metodo externo durante el registro, pero ingresarlo directamente sera posible
   }
 
+  public Usuario(String nombre, String username, String email, LocalDate fecha_nacimiento, String password) {
+    this.nombre = nombre;
+    this.username = username;
+    this.email = email;
+    this.fecha_nacimiento = fecha_nacimiento;
+    this.password = password;
+  }
+
   public int getId() {
     return this.id;
   }

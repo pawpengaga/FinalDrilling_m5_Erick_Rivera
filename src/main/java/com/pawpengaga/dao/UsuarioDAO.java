@@ -8,6 +8,7 @@ import java.util.List;
 
 import com.pawpengaga.modelo.Horoscopo;
 import com.pawpengaga.modelo.Usuario;
+import com.pawpengaga.modelo.ZodiacoEnum;
 import com.pawpengaga.procesaconexion.DatabaseConnection;
 
 public class UsuarioDAO {
@@ -32,8 +33,8 @@ public class UsuarioDAO {
       stmt.setDate(4, java.sql.Date.valueOf(user.getFecha_nacimiento()));
       stmt.setString(5, user.getPassword());
       stmt.setString(6, registroAnimal(user.getFecha_nacimiento()));
-
-      if (stmt.executeUpdate() < 0) {
+      
+      if (stmt.executeUpdate() > 0) {
         System.out.println("Usuario registrado!");
         return true;
       }
@@ -56,10 +57,18 @@ public class UsuarioDAO {
     List<Horoscopo> listaHoroscopo = horoscopoDAO.getHoroscopo();
 
     for (Horoscopo temp : listaHoroscopo) {
+      // Metodo obteniendo de la base de datos en base a rangos
       if (fecha.isAfter(temp.getFecha_inicio()) && fecha.isBefore(temp.getFecha_final())) {
         return temp.getHoroscopo();
       } else if (fecha.equals(temp.getFecha_inicio()) || fecha.equals(temp.getFecha_final())) {
         return temp.getHoroscopo();
+      } else {
+        // Metodo alternativo para fechas fuera del rango... potencialmente menos preciso
+        int anio = fecha.getYear();
+        int resto = anio % 12;
+        String zodiaco = String.valueOf(ZodiacoEnum.values()[resto]);
+        
+        return zodiaco;
       }
     }
 

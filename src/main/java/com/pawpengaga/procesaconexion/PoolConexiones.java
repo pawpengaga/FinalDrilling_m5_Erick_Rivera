@@ -8,7 +8,7 @@ public class PoolConexiones {
   private static final BasicDataSource dataSource = new BasicDataSource();
 
   static {
-    dataSource.setUrl("jdbc:postgresql:final_drilling_m5");
+    dataSource.setUrl("jdbc:postgresql:final_m5_erick_rivera");
     dataSource.setUsername("postgres");
     dataSource.setPassword("12345678");
     dataSource.setDriverClassName("org.postgresql.Driver");

@@ -6,7 +6,7 @@ import java.sql.SQLException;
 
 public class DatabaseConnection {
 
-  public static final String dbName = "final_drilling_m5";
+  public static final String dbName = "final_m5_erick_rivera";
   public static final String dbUser = "postgres";
   public static final String dbPass = "12345678";
 
@@ -17,7 +17,7 @@ public class DatabaseConnection {
     try {
       
       Class.forName("org.postgresql.Driver");
-      cnx = DriverManager.getConnection("jdbc:postgresql:final_drilling_m5?user=postgres&password=12345678");
+      cnx = DriverManager.getConnection("jdbc:postgresql:final_m5_erick_rivera?user=postgres&password=12345678");
       // cnx = DriverManager.getConnection("jdbc:postgresql:"+ dbName +"?user="+ dbUser +"&password=" + dbPass);
 
       System.out.println("Cargo el driver...");

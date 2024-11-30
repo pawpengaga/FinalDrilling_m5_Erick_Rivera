@@ -1,7 +1,7 @@
 -- Conjunto de consultas para crear todos los datos necesarios
 
 -- Crear base de datos
-CREATE DATABASE final_drilling_m5;
+CREATE DATABASE final_m5_erick_rivera;
 
 -- Crear las tablas de horoscopo y usuarios
 CREATE TABLE horoscopo(
@@ -13,8 +13,8 @@ CREATE TABLE horoscopo(
 CREATE TABLE usuarios(
   id serial NOT NULL PRIMARY KEY,
   nombre VARCHAR(30),
-  username VARCHAR(30),
-  email VARCHAR(30),
+  username VARCHAR(30) NOT NULL UNIQUE,
+  email VARCHAR(30) NOT NULL UNIQUE,
   fecha_nacimiento DATE,
   password VARCHAR(30),
   animal VARCHAR(30)
@@ -30,4 +30,4 @@ INSERT INTO usuarios(nombre, username, email, fecha_nacimiento, password, animal
 ('Erick Rivera', 'admin', 'admin@admin.com', '22-03-1997', '1234', 'Buey');
 
 -- Para emergencias
--- DROP DATABASE final_drilling_m5;
+DROP DATABASE final_m5_erick_rivera;
