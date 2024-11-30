@@ -17,9 +17,9 @@ public class HoroscopoDAO {
 
     String sql = "SELECT * FROM horoscopo";
 
-    try {
-      Connection conn = DatabaseConnection.getConnection();
-      Statement stmt = conn.createStatement();
+    try(Connection conn = DatabaseConnection.getConnection();
+    Statement stmt = conn.createStatement()){
+      
       ResultSet rs = stmt.executeQuery(sql);
 
       while (rs.next()) {

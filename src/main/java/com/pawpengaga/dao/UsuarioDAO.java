@@ -28,9 +28,8 @@ public class UsuarioDAO {
 
     String sql = "INSERT INTO usuarios(nombre, username, email, fecha_nacimiento, password, animal) VALUES (?, ?, ?, ?, ?, ?)";    
 
-    try {
-      Connection conn = DatabaseConnection.getConnection();
-      PreparedStatement stmt = conn.prepareStatement(sql);
+    try (Connection conn = DatabaseConnection.getConnection();
+      PreparedStatement stmt = conn.prepareStatement(sql)) {
 
       stmt.setString(1, user.getNombre());
       stmt.setString(2, user.getUsername());
@@ -44,8 +43,8 @@ public class UsuarioDAO {
         return true;
       }
 
-      stmt.close();
-      conn.close();
+      // stmt.close();
+      // conn.close();
 
     } catch (Exception e) {
       e.printStackTrace();
@@ -66,9 +65,8 @@ public class UsuarioDAO {
 
     String sql = "SELECT * FROM usuarios WHERE email = ? AND password = ?";
 
-    try {
-      Connection conn = DatabaseConnection.getConnection();
-      PreparedStatement stmt = conn.prepareStatement(sql);
+    try (Connection conn = DatabaseConnection.getConnection();
+      PreparedStatement stmt = conn.prepareStatement(sql)) {
 
       stmt.setString(1, correo);
       stmt.setString(2, clave);
@@ -88,8 +86,8 @@ public class UsuarioDAO {
         return user;
       }
 
-      stmt.close();
-      conn.close();
+      // stmt.close();
+      // conn.close();
 
     } catch (Exception e) {
       e.printStackTrace();
@@ -109,9 +107,9 @@ public class UsuarioDAO {
     String sql = "SELECT * FROM usuarios ORDER BY id";
     List<Usuario> users = new ArrayList<>();
 
-    try {
-      Connection conn = DatabaseConnection.getConnection();
-      Statement stmt = conn.createStatement();
+    try (Connection conn = DatabaseConnection.getConnection();
+    Statement stmt = conn.createStatement()) {
+
       ResultSet rs = stmt.executeQuery(sql);
 
       while (rs.next()) {
@@ -126,8 +124,8 @@ public class UsuarioDAO {
         ));
       }
 
-      stmt.close();
-      conn.close();
+      // stmt.close();
+      // conn.close();
 
     } catch (Exception e) {
       e.printStackTrace();
@@ -152,9 +150,8 @@ public class UsuarioDAO {
     String sql = "SELECT * FROM usuarios WHERE LOWER(nombre) LIKE ? ORDER BY id";
     List<Usuario> matchSet = new ArrayList<>(); // Lista para guardar las coincidencias
 
-    try {
-      Connection conn = DatabaseConnection.getConnection();
-      PreparedStatement stmt = conn.prepareStatement(sql);
+    try(Connection conn = DatabaseConnection.getConnection();
+    PreparedStatement stmt = conn.prepareStatement(sql)) {
 
       stmt.setString(1, "%" + searchQuery.toLowerCase() + "%");
       ResultSet rs = stmt.executeQuery();
@@ -171,8 +168,8 @@ public class UsuarioDAO {
         ));
       }
 
-      conn.close();
-      stmt.close();
+      // conn.close();
+      // stmt.close();
     } catch (Exception e){
       e.printStackTrace();
     }
@@ -190,9 +187,8 @@ public class UsuarioDAO {
 
     String sql = "UPDATE usuarios SET nombre=?, username=?, email=?, fecha_nacimiento=?, password=?, animal=? WHERE id=?";
 
-    try {
-      Connection conn = DatabaseConnection.getConnection();
-      PreparedStatement stmt = conn.prepareStatement(sql);
+    try(Connection conn = DatabaseConnection.getConnection();
+    PreparedStatement stmt = conn.prepareStatement(sql)) {
 
       stmt.setString(1, user.getNombre());
       stmt.setString(2, user.getNombre());
@@ -204,13 +200,9 @@ public class UsuarioDAO {
 
       if (stmt.executeUpdate() > 0) {
         System.out.println("Usuario actualizado con exito");
-        stmt.close();
-        conn.close();
         return true;
       } else {
         System.out.println("Fallo la actualizacion...");
-        stmt.close();
-        conn.close();
         return false;
       }
 
@@ -230,22 +222,16 @@ public class UsuarioDAO {
     
     String sql = "DELETE FROM usuarios WHERE id = ?";
 
-    try {
-      
-      Connection conn = DatabaseConnection.getConnection();
-      PreparedStatement stmt = conn.prepareStatement(sql);
-
+    try(Connection conn = DatabaseConnection.getConnection();
+    PreparedStatement stmt = conn.prepareStatement(sql)) {
+    
       stmt.setInt(1, idUser);
 
       if (stmt.executeUpdate() > 0) {
         System.out.println("Usuario eliminado con exito");
-        stmt.close();
-        conn.close();
         return true;
       } else {
         System.out.println("Fallo la eliminacion...");
-        stmt.close();
-        conn.close();
         return false;
       }
 
