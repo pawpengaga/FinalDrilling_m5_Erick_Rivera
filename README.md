@@ -19,5 +19,5 @@ Un sistema de hóróscopo Chino
 - util: Clases utilitarias generales
 
 ### Flujo de accion
- 1. Crear la logica de lectura del horoscopo
+ 1. Crear la logica de lectura del horoscopo (Listo)
  2. Crear la logica de usuario después para asegurar que podré contar con los datos del horóscopo en tiempo real para la asignación durante el proceso de registro
