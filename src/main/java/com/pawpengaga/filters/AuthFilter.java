@@ -21,6 +21,7 @@ import java.io.IOException;
 	"/yourHoroscope.jsp",
 	"/editUser.jsp",
 	"/searchUsers.jsp",
+	"/listUsers.jsp",
 	"/horoscopo"
 })
 public class AuthFilter extends HttpFilter implements Filter {

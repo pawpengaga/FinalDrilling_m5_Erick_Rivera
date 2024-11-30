@@ -34,6 +34,13 @@ public class UsersServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String accion = request.getParameter("accion");
+		
+		if ("list".equals(accion)) {
+			// TODO: Aqui va la lista de usuarios
+		} else if ("search".equals(accion)){
+			// TODO: Aqui va la busqueda de usuarios
+		}
 	}
 
 	/**
@@ -84,8 +91,6 @@ public class UsersServlet extends HttpServlet {
 				request.setAttribute("message", "Error: " + e.getMessage());
 				request.getRequestDispatcher("login.jsp").forward(request, response);
 			}
-
-		} else if ("list".equals(accion)) {
 
 		} else if ("logout".equals(accion)){
 			
