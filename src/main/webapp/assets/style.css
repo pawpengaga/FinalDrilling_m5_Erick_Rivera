@@ -25,3 +25,24 @@ body {
   justify-content: center;
   min-height: 300px;
 }
+
+.mylink {
+	color: #D13100 !important;
+}
+
+.btn-primary{
+  border: 1px solid #D13100;
+	background-color: #D13100;
+}
+
+.btn-primary:hover,
+.btn-primary:focus {
+  border: 1px solid #ec3e09;
+	background-color: #ec3e09;
+}
+
+.btn-primary:active {
+  border: 1px solid #cf3b0e !important;
+  background-color: #cf3b0e !important;
+}
+

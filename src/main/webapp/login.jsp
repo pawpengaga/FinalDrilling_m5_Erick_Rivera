@@ -23,7 +23,7 @@
                     <button type="submit" class="btn btn-primary w-100 mt-3">Iniciar sesión</button>
                 </div>
                 <div>
-                    <p>Si aún no tienes una cuenta haz clic <a href="signup.jsp">aquí</a></p>
+                    <p>Si aún no tienes una cuenta haz clic <a class="mylink" href="signup.jsp">aquí</a></p>
                 </div>
             </div>
         </form>

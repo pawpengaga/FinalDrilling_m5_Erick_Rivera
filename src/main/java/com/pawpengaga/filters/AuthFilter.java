@@ -20,7 +20,8 @@ import java.io.IOException;
 @WebFilter(urlPatterns = {
 	"/yourHoroscope.jsp",
 	"/editUser.jsp",
-	"/searchUsers.jsp"
+	"/searchUsers.jsp",
+	"/horoscopo"
 })
 public class AuthFilter extends HttpFilter implements Filter {
        
