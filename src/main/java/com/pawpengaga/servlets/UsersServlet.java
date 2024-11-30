@@ -100,6 +100,21 @@ public class UsersServlet extends HttpServlet {
 			request.setAttribute("message", "Sesion cerrada exitosamente...");
 			request.getRequestDispatcher("login.jsp").forward(request, response);
 
+		} else if ("delete".equals(accion)) {
+
+			int userId = Integer.parseInt(request.getParameter("userId"));
+
+			if (usuarioDAO.deleteUser(userId) == true) {
+				HttpSession session = request.getSession(false);
+				session.removeAttribute("current_user");
+				session.invalidate();
+				request.setAttribute("message", "Cuenta eliminada exitosamente, gracias por usar nuestra aplicación.");
+				request.getRequestDispatcher("login.jsp").forward(request, response);
+			} else {
+				request.setAttribute("message", "Ha ocurrido un problema con la eliminacion de su cuenta...");
+				request.getRequestDispatcher("index.jsp").forward(request, response);
+			}
+
 		}
 
 	}

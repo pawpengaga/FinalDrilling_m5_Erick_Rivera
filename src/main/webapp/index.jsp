@@ -21,14 +21,26 @@
                         <a class="nav-link py-4 display-5" href="#">Buscar usuarios</a>
                         <a class="nav-link py-4 display-5" href="#">Listar usuarios</a>
                         <a class="nav-link py-4 display-5" href="#">Modificar datos</a>
-                        <a class="nav-link py-4 display-5" href="#">Eliminar cuenta</a>
+                        <a class="nav-link py-4 display-5" href="javascript: deleteAccount()">Eliminar cuenta</a>
                     </nav>
+                    <form name="deleteForm" action="/FinalDrilling_m5_Erick_Rivera/users?accion=delete" method="POST" style="display: none;">
+                        <input type="hidden" name="userId" value="${current_user.id}" />
+                    </form>
                 </div>
             </c:if>
         </section>
         
     </div>
-    
+    <script>
+        function deleteAccount(){
+            const confirma = confirm("Está a punto de borrar su cuenta. ¿Está segur@?")
+            if (confirma){
+                document.deleteForm.submit()
+            } else {
+                alert("Sabia decisión...")
+            }
+        }
+    </script>
     <%@ include file="components/footer.jsp" %>
 </body>
 </html>
