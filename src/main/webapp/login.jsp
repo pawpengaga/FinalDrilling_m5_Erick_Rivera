@@ -22,9 +22,6 @@
                 <div>
                     <button type="submit" class="btn btn-primary w-100 mt-3">Iniciar sesión</button>
                 </div>
-                <c:if test="${not empty message}">
-                    <p style="color: red;">${message}</p>
-                </c:if>
             </div>
         </form>
     </div>

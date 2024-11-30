@@ -35,9 +35,13 @@ Dentro de la carpeta de data/ se encuentra la secuencia de comandos `data.sql`, 
  
       2.2. Hacer que el login funcione (LISTO)
  
-      2.3. Hacer que el filter funcione
+      2.3. Hacer que el filter funcione (LISTO)
  
       2.4. Hacer que listar (Buscar funcione)
  
       2.5. Hacer que editar y eliminar funcionen
  
+
+### Sistema de mensajeria
+
+Las alertas y mensajes se pasan como alertas de Javascript a través del parameter `message` en los servlets

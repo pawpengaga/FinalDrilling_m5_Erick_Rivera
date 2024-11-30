@@ -56,7 +56,7 @@ public class UsersServlet extends HttpServlet {
 				if (usuarioDAO.registrarUsuario(new Usuario(nombre, username, email, fechaNacimiento, password))) {
 					request.setAttribute("message", "Usuario registrado");
 				} else {
-				request.setAttribute("message", "Error al registrar usuario...");
+				request.setAttribute("message", "Hubo un error al registrar el usuario...");
 				}
 				request.getRequestDispatcher("signup.jsp").forward(request, response);
 				} catch (Exception e) {
