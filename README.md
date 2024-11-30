@@ -33,7 +33,7 @@ Dentro de la carpeta de data/ se encuentra la secuencia de comandos `data.sql`, 
 
       2.1. Hacer que el registro funcione (LISTO)
  
-      2.2. Hacer que el login funcione
+      2.2. Hacer que el login funcione (LISTO)
  
       2.3. Hacer que el filter funcione
  
