@@ -6,6 +6,10 @@ Un sistema de hóróscopo Chino
 
 Dentro de la carpeta de data/ se encuentra la secuencia de comandos `data.sql`, para ejectuar este archivo se debe cambiar la ruta absoluta por la propia del equipo donde se ejecute el proyecto
 
+### Campos del modelo de datos para Usuarios
+
+![alt text](image.png)
+
 ### Usando
 
 - Posgresql
@@ -27,7 +31,7 @@ Dentro de la carpeta de data/ se encuentra la secuencia de comandos `data.sql`, 
 
   2. Crear la logica de usuario después para asegurar que podré contar con los datos del horóscopo en tiempo real para la asignación durante el proceso de registro
 
-      2.1. Hacer que el registro funcione
+      2.1. Hacer que el registro funcione (LISTO)
  
       2.2. Hacer que el login funcione
  

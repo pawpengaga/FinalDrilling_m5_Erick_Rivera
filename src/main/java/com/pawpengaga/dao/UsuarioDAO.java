@@ -2,6 +2,7 @@ package com.pawpengaga.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.List;
@@ -46,6 +47,43 @@ public class UsuarioDAO {
     return false;
   }
 
+  public Usuario getUsuariobyCredentials(String correo, String clave) throws SQLException{
+
+    String sql = "SELECT * FROM usuarios WHERE email = ? AND password = ?";
+
+    try {
+      Connection conn = DatabaseConnection.getConnection();
+      PreparedStatement stmt = conn.prepareStatement(sql);
+
+      stmt.setString(1, correo);
+      stmt.setString(2, clave);
+
+      ResultSet rs = stmt.executeQuery();
+
+      if (rs.next()) {
+        Usuario user = new Usuario(
+          rs.getInt("id"),
+          rs.getString("nombre"),
+          rs.getString("username"),
+          rs.getString("email"),
+          rs.getDate("fecha_nacimiento").toLocalDate(),
+          "[FILTERED]", // Se deja fuera la contraseña del objeto publico
+          rs.getString("animal")
+        );
+        return user;
+      }
+
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+
+    return null;
+
+  }
+
+
+  /* ************************************************ METODOS PRIVADOS ************************************************ */
+
   /**
    * Metodo interno que decide que animal del zodiaco le corresponde a un usuario en funcion de su fecha de nacimiento.
    * @param fecha La fecha de nacimiento del usuario
@@ -71,7 +109,6 @@ public class UsuarioDAO {
         return zodiaco;
       }
     }
-
     return "NO POSEE";
   }
 

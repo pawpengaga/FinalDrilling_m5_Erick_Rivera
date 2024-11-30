@@ -5,6 +5,8 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+
 import java.io.IOException;
 import java.time.LocalDate;
 
@@ -62,6 +64,28 @@ public class UsersServlet extends HttpServlet {
 					e.printStackTrace();
 			}
 		
+		} else if ("login".equals(accion)){
+
+			String email = request.getParameter("email");
+			String password = request.getParameter("password");
+
+			try {
+				Usuario user = usuarioDAO.getUsuariobyCredentials(email, password);
+				if (user != null) {
+					HttpSession session = request.getSession();
+
+					// Se manda el objeto completo de user
+					session.setAttribute("current_user", user);
+					request.getRequestDispatcher("index.jsp").forward(request, response);
+				} else {
+					request.setAttribute("error", "Usuario y Clave invalidos!!!");
+					request.getRequestDispatcher("login.jsp").forward(request, response);
+				}
+			} catch (Exception e) {
+				request.setAttribute("error", "Error: " + e.getMessage());
+				request.getRequestDispatcher("login.jsp").forward(request, response);
+			}
+
 		}
 
 	}

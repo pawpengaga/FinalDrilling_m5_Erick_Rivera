@@ -12,10 +12,15 @@ public class Usuario {
   private String password;
   private String animal;
   
+  /**
+   * Constructor vacio
+   */
   public Usuario(){
-
   }
 
+  /**
+   * @param animal De uso exclusivo para INSERTS directos por SQL
+   */
   public Usuario(String nombre, String username, String email, LocalDate fecha_nacimiento, String password, String animal) {
     this.nombre = nombre;
     this.username = username;
@@ -25,6 +30,9 @@ public class Usuario {
     this.animal = animal; // Sera definido a partir de un metodo externo durante el registro, pero ingresarlo directamente sera posible
   }
 
+  /**
+   * Constructor para creacion de Usuarios por medio de Java, el id y el animal del zodiaco son auto generados
+   */
   public Usuario(String nombre, String username, String email, LocalDate fecha_nacimiento, String password) {
     this.nombre = nombre;
     this.username = username;
@@ -32,6 +40,20 @@ public class Usuario {
     this.fecha_nacimiento = fecha_nacimiento;
     this.password = password;
   }
+
+  /**
+   * Constructor completo, para almacenar datos leidos desde la base de datos
+   */
+  public Usuario(int id, String nombre, String username, String email, LocalDate fecha_nacimiento, String password, String animal) {
+    this.id = id;
+    this.nombre = nombre;
+    this.username = username;
+    this.email = email;
+    this.fecha_nacimiento = fecha_nacimiento;
+    this.password = password;
+    this.animal = animal;
+  }
+
 
   public int getId() {
     return this.id;
@@ -97,6 +119,7 @@ public class Usuario {
       ", username='" + getUsername() + "'" +
       ", email='" + getEmail() + "'" +
       ", fecha_nacimiento='" + getFecha_nacimiento() + "'" +
+      ", password='" + getPassword() + "'" +
       ", animal='" + getAnimal() + "'" +
       " }";
   }
