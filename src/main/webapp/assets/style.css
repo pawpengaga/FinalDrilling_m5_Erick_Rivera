@@ -2,26 +2,26 @@
 
 body {
   font-family: 'Open Sans';
-  height: 100vh;
 }
 
 .nav-fill .nav-link{
-  border: 1px solid #0D6EFD;
+  border: 1px solid #D13100;
+  color: #D13100;
 }
 
 .nav-fill .nav-link:hover {
-  transition: background-color .15s ease-in-out,box-shadow .15s ease-in-out;
-  background-color: #0d6dfd1a;
+  transition: all .15s ease-in-out,box-shadow .15s ease-in-out;
+  background-color: #d1310017;
 }
 
 .nav-fill .active:hover {
-  transition: background-color .15s ease-in-out,box-shadow .15s ease-in-out;
-  background-color: #3586ff;
+  transition: all .15s ease-in-out,box-shadow .15s ease-in-out;
+  background-color: #ec3e09;
 }
 
 #index-menu{
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 250px;
+  min-height: 300px;
 }
