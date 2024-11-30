@@ -31,6 +31,8 @@ public class HoroscopoDAO {
           rs.getDate("fecha_fin").toLocalDate()
         ));
       }
+      conn.close();
+      stmt.close();
 
     } catch (Exception e) {
       e.printStackTrace();

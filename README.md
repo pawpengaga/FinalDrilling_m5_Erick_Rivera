@@ -37,7 +37,7 @@ Dentro de la carpeta de data/ se encuentra la secuencia de comandos `data.sql`, 
  
       2.3. Hacer que el filter funcione (LISTO)
  
-      2.4. Hacer que listar (Buscar funcione)
+      2.4. Hacer que listar (Buscar funcione) - HACIENDO, ver primero las cosas en el servlet
  
       2.5. Hacer que editar y eliminar funcionen
  

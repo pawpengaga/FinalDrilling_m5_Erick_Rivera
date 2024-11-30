@@ -4,7 +4,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.pawpengaga.modelo.Horoscopo;
@@ -15,7 +17,7 @@ import com.pawpengaga.procesaconexion.DatabaseConnection;
 public class UsuarioDAO {
 
   /**
-   * Primer paso. Registro del usuario
+   * Registro del usuario
    * @param user Un objeto usuario venido desde el DAO
    * @return Un valor booleano true o false
    * @throws SQLException
@@ -40,6 +42,9 @@ public class UsuarioDAO {
         return true;
       }
 
+      stmt.close();
+      conn.close();
+
     } catch (Exception e) {
       e.printStackTrace();
       return false;
@@ -49,7 +54,7 @@ public class UsuarioDAO {
   }
 
   /**
-   * Segundo paso. Obtencion de un solo usuario en base a sus credenciables para el login
+   * Obtencion de un solo usuario en base a sus credenciables para el login
    * @param correo
    * @param clave
    * @return
@@ -81,6 +86,9 @@ public class UsuarioDAO {
         return user;
       }
 
+      stmt.close();
+      conn.close();
+
     } catch (Exception e) {
       e.printStackTrace();
     }
@@ -89,8 +97,83 @@ public class UsuarioDAO {
 
   }
 
-  
+  /**
+   * Consigue todos los usuarios, se filtran las claves
+   * @return Una lista con todos los usuarios
+   * @throws SQLException
+   */
+  public List<Usuario> getAllUsuarios() throws SQLException{
 
+    String sql = "SELECT * FROM usuarios ORDER BY id";
+    List<Usuario> users = new ArrayList<>();
+
+    try {
+      Connection conn = DatabaseConnection.getConnection();
+      Statement stmt = conn.createStatement();
+      ResultSet rs = stmt.executeQuery(sql);
+
+      while (rs.next()) {
+        users.add(new Usuario(
+          rs.getInt("id"),
+          rs.getString("nombre"),
+          rs.getString("username"),
+          rs.getString("email"),
+          rs.getDate("fecha_nacimiento").toLocalDate(),
+          "[FILTERED]", // Se deja fuera la contraseña del objeto publico
+          rs.getString("animal")
+        ));
+      }
+
+      stmt.close();
+      conn.close();
+
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+    
+    return users;
+
+  }
+
+  /**
+   * Hacer busquedas parciales del usuario en base a su nombre
+   * @param searchQuery Un String parcial cualquiera
+   * @return Una lista con todas las coincidencias
+   */
+  public List<Usuario> getUserByName(String searchQuery) throws SQLException {
+
+    // Devolver una lista vacia si no hay nada para evitar hacer la consulta
+    if (searchQuery == null || searchQuery.trim().isEmpty()) {
+      return new ArrayList<>();
+    }
+
+    String sql = "SELECT * FROM usuarios WHERE LOWER(nombre) LIKE ? ORDER BY id";
+    List<Usuario> matchSet = new ArrayList<>(); // Lista para guardar las coincidencias
+
+    try (Connection conn = DatabaseConnection.getConnection();
+    PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+      stmt.setString(1, "%" + searchQuery.toLowerCase() + "%");
+      ResultSet rs = stmt.executeQuery();
+
+      while (rs.next()) {
+        matchSet.add(new Usuario(
+          rs.getInt("id"),
+          rs.getString("nombre"),
+          rs.getString("username"),
+          rs.getString("email"),
+          rs.getDate("fecha_nacimiento").toLocalDate(),
+          "[FILTERED]",
+          rs.getString("animal")
+        ));
+      }
+    } catch (Exception e){
+      e.printStackTrace();
+    }
+
+    return matchSet;
+  
+  }
 
   /* ************************************************ METODOS PRIVADOS ************************************************ */
 
