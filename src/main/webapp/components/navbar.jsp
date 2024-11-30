@@ -25,12 +25,14 @@
               </li>
             </c:if>
             <c:if test="${not empty sessionScope.current_user}">
-              <li class="nav-item ms-auto">
-                <a class="nav-link" href="/FinalDrilling_m5_Erick_Rivera/logout">
-                  <span>Cerrar sesión </span>
-                  <i class="fa-solid fa-arrow-right-from-bracket"></i>
-                </a>
-              </li>
+              <form name="logoutForm" action="/FinalDrilling_m5_Erick_Rivera/users?accion=logout" method="POST">
+                <li class="nav-item ms-auto">
+                  <a class="nav-link" href="javascript: submitform()">
+                    <span>Cerrar sesión </span>
+                    <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                  </a>
+                </li>
+              </form>
             </c:if>
           </div>
         </ul>
@@ -38,3 +40,9 @@
     </div>
   </nav>
 </header>
+
+<script>
+  function submitform(){
+    document.logoutForm.submit();
+  }
+</script>

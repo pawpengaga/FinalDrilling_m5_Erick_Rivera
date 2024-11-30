@@ -49,7 +49,7 @@ public class AuthFilter extends HttpFilter implements Filter {
 
 		if(session == null || session.getAttribute("current_user") == null){
 			// Aqui se hace una redireccion al "login"
-			httpRequest.setAttribute("error", "AUTENTICACIÓN NO PASADA!");
+			httpRequest.setAttribute("message", "NECESITA INICIAR SESION PRIMERO!");
 			httpRequest.getRequestDispatcher("login.jsp").forward(httpRequest, httpResponse);
 		} else {
 			// Continua a donde fue llamado

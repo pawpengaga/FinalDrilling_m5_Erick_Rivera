@@ -54,11 +54,11 @@ public class UsersServlet extends HttpServlet {
 
 			try {
 				if (usuarioDAO.registrarUsuario(new Usuario(nombre, username, email, fechaNacimiento, password))) {
-					request.setAttribute("mensaje", "Usuario registrado");
+					request.setAttribute("message", "Usuario registrado");
 				} else {
-				request.setAttribute("mensaje", "Error al registrar usuario...");
+				request.setAttribute("message", "Error al registrar usuario...");
 				}
-					System.out.println(request.getAttribute("mensaje"));
+				request.getRequestDispatcher("signup.jsp").forward(request, response);
 				} catch (Exception e) {
 					e.printStackTrace();
 			}
@@ -77,13 +77,21 @@ public class UsersServlet extends HttpServlet {
 					session.setAttribute("current_user", user);
 					request.getRequestDispatcher("index.jsp").forward(request, response);
 				} else {
-					request.setAttribute("error", "Usuario y Clave invalidos!!!");
+					request.setAttribute("message", "Usuario y Clave invalidos!!!");
 					request.getRequestDispatcher("login.jsp").forward(request, response);
 				}
 			} catch (Exception e) {
-				request.setAttribute("error", "Error: " + e.getMessage());
+				request.setAttribute("message", "Error: " + e.getMessage());
 				request.getRequestDispatcher("login.jsp").forward(request, response);
 			}
+
+		} else if ("logout".equals(accion)){
+			
+			HttpSession session = request.getSession(false);
+			session.removeAttribute("current_user");
+			session.invalidate();
+			request.setAttribute("message", "Sesion cerrada exitosamente...");
+			request.getRequestDispatcher("login.jsp").forward(request, response);
 
 		}
 
