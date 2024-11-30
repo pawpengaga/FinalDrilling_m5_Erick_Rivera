@@ -4,7 +4,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.List;
 
+import com.pawpengaga.modelo.Horoscopo;
 import com.pawpengaga.modelo.Usuario;
 import com.pawpengaga.procesaconexion.DatabaseConnection;
 
@@ -49,7 +51,19 @@ public class UsuarioDAO {
    * @return El animal que corresponda
    */
   private String registroAnimal(LocalDate fecha){
-    return "";
+
+    HoroscopoDAO horoscopoDAO = new HoroscopoDAO();
+    List<Horoscopo> listaHoroscopo = horoscopoDAO.getHoroscopo();
+
+    for (Horoscopo temp : listaHoroscopo) {
+      if (fecha.isAfter(temp.getFecha_inicio()) && fecha.isBefore(temp.getFecha_final())) {
+        return temp.getHoroscopo();
+      } else if (fecha.equals(temp.getFecha_inicio()) || fecha.equals(temp.getFecha_final())) {
+        return temp.getHoroscopo();
+      }
+    }
+
+    return "NO POSEE";
   }
 
 }
