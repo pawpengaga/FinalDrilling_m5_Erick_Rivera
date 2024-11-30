@@ -2,6 +2,10 @@
 
 Un sistema de hóróscopo Chino
 
+## Instrucciones para poblar datos
+
+Dentro de la carpeta de data/ se encuentra la secuencia de comandos `data.sql`, para ejectuar este archivo se debe cambiar la ruta absoluta por la propia del equipo donde se ejecute el proyecto
+
 ### Usando
 
 - Posgresql
@@ -19,5 +23,17 @@ Un sistema de hóróscopo Chino
 - util: Clases utilitarias generales
 
 ### Flujo de accion
- 1. Crear la logica de lectura del horoscopo (Listo)
- 2. Crear la logica de usuario después para asegurar que podré contar con los datos del horóscopo en tiempo real para la asignación durante el proceso de registro
+  1. Crear la logica de lectura del horoscopo (Listo)
+
+  2. Crear la logica de usuario después para asegurar que podré contar con los datos del horóscopo en tiempo real para la asignación durante el proceso de registro
+
+      2.1. Hacer que el registro funcione
+ 
+      2.2. Hacer que el login funcione
+ 
+      2.3. Hacer que el filter funcione
+ 
+      2.4. Hacer que listar (Buscar funcione)
+ 
+      2.5. Hacer que editar y eliminar funcionen
+ 
