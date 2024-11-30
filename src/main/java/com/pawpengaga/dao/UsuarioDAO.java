@@ -9,6 +9,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.xml.crypto.Data;
+
 import com.pawpengaga.modelo.Horoscopo;
 import com.pawpengaga.modelo.Usuario;
 import com.pawpengaga.modelo.ZodiacoEnum;
@@ -150,8 +152,9 @@ public class UsuarioDAO {
     String sql = "SELECT * FROM usuarios WHERE LOWER(nombre) LIKE ? ORDER BY id";
     List<Usuario> matchSet = new ArrayList<>(); // Lista para guardar las coincidencias
 
-    try (Connection conn = DatabaseConnection.getConnection();
-    PreparedStatement stmt = conn.prepareStatement(sql)) {
+    try {
+      Connection conn = DatabaseConnection.getConnection();
+      PreparedStatement stmt = conn.prepareStatement(sql);
 
       stmt.setString(1, "%" + searchQuery.toLowerCase() + "%");
       ResultSet rs = stmt.executeQuery();
@@ -167,12 +170,91 @@ public class UsuarioDAO {
           rs.getString("animal")
         ));
       }
+
+      conn.close();
+      stmt.close();
     } catch (Exception e){
       e.printStackTrace();
     }
 
     return matchSet;
   
+  }
+
+  /**
+   * Updatea un usuario y devuelve un valor booleando dependiendo de su tuvo exito o no
+   * @param user Un objeto usuario construido desde el formulario
+   * @return
+   */
+  public boolean updateUser(Usuario user){
+
+    String sql = "UPDATE usuarios SET nombre=?, username=?, email=?, fecha_nacimiento=?, password=?, animal=? WHERE id=?";
+
+    try {
+      Connection conn = DatabaseConnection.getConnection();
+      PreparedStatement stmt = conn.prepareStatement(sql);
+
+      stmt.setString(1, user.getNombre());
+      stmt.setString(2, user.getNombre());
+      stmt.setString(3, user.getEmail());
+      stmt.setDate(4, java.sql.Date.valueOf(user.getFecha_nacimiento()));
+      stmt.setString(5, user.getPassword());
+      stmt.setString(6, registroAnimal(user.getFecha_nacimiento()));
+      stmt.setInt(7, user.getId()); // Debe conseguirse con un hidden al current user
+
+      if (stmt.executeUpdate() > 0) {
+        System.out.println("Usuario actualizado con exito");
+        stmt.close();
+        conn.close();
+        return true;
+      } else {
+        System.out.println("Fallo la actualizacion...");
+        stmt.close();
+        conn.close();
+        return false;
+      }
+
+    } catch (Exception e) {
+      e.printStackTrace();
+      return false;
+    }
+
+  }
+
+  /**
+   * Elimina un usuario en base a su ID
+   * @param idUser Conseguido desde un campo hidden ligado al current_user
+   * @return
+   */
+  public boolean deleteUser(int idUser){
+    
+    String sql = "DELETE FROM usuarios WHERE id = ?";
+
+    try {
+      
+      Connection conn = DatabaseConnection.getConnection();
+      PreparedStatement stmt = conn.prepareStatement(sql);
+
+      stmt.setInt(1, idUser);
+
+      if (stmt.executeUpdate() > 0) {
+        System.out.println("Usuario eliminado con exito");
+        stmt.close();
+        conn.close();
+        return true;
+      } else {
+        System.out.println("Fallo la eliminacion...");
+        stmt.close();
+        conn.close();
+        return false;
+      }
+
+    } catch (Exception e) {
+      e.printStackTrace();
+      return false;
+    }
+
+
   }
 
   /* ************************************************ METODOS PRIVADOS ************************************************ */
