@@ -6,7 +6,7 @@
     <%@ include file="components/navbar.jsp" %>
     
     <div class="container mt-5">
-        <h1>Editar usuario</h1>
+        <h1 class="display-3">Editar usuario</h1>
     </div>
     
     <%@ include file="components/footer.jsp" %>

@@ -85,6 +85,8 @@ public class UsersServlet extends HttpServlet {
 				request.getRequestDispatcher("login.jsp").forward(request, response);
 			}
 
+		} else if ("list".equals(accion)) {
+
 		} else if ("logout".equals(accion)){
 			
 			HttpSession session = request.getSession(false);

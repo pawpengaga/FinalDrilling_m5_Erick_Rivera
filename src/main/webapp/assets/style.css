@@ -1,0 +1,27 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+
+body {
+  font-family: 'Open Sans';
+  height: 100vh;
+}
+
+.nav-fill .nav-link{
+  border: 1px solid #0D6EFD;
+}
+
+.nav-fill .nav-link:hover {
+  transition: background-color .15s ease-in-out,box-shadow .15s ease-in-out;
+  background-color: #0d6dfd1a;
+}
+
+.nav-fill .active:hover {
+  transition: background-color .15s ease-in-out,box-shadow .15s ease-in-out;
+  background-color: #3586ff;
+}
+
+#index-menu{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 250px;
+}

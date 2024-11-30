@@ -6,7 +6,7 @@
     <%@ include file="components/navbar.jsp" %>
     
     <div class="container mt-5">
-        <h1>Registrarse</h1>
+        <h1 class="display-3">Registrarse</h1>
         <form action="/FinalDrilling_m5_Erick_Rivera/users?accion=register" method="POST" class="mt-5 d-flex flex-column gap-4">
             <!-- COLUMNA 1 -->
             <div class="col-12 mx-auto d-flex flex-row gap-4">
@@ -39,6 +39,9 @@
             </div>
             <div>
                 <button type="submit" class="btn btn-primary">Registrarse</button>
+            </div>
+            <div>
+                <p>¿Ya tienes una cuenta? Haz clic <a href="login.jsp">aquí</a></p>
             </div>
         </form>
     </div>

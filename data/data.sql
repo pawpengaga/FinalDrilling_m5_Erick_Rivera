@@ -30,4 +30,4 @@ INSERT INTO usuarios(nombre, username, email, fecha_nacimiento, password, animal
 ('Erick Rivera', 'admin', 'admin@admin.com', '22-03-1997', '1234', 'Buey');
 
 -- Para emergencias
-DROP DATABASE final_m5_erick_rivera;
+-- DROP DATABASE final_m5_erick_rivera;

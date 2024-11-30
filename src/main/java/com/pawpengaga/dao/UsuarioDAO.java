@@ -48,6 +48,13 @@ public class UsuarioDAO {
     return false;
   }
 
+  /**
+   * Segundo paso. Obtencion de un solo usuario en base a sus credenciables para el login
+   * @param correo
+   * @param clave
+   * @return
+   * @throws SQLException
+   */
   public Usuario getUsuariobyCredentials(String correo, String clave) throws SQLException{
 
     String sql = "SELECT * FROM usuarios WHERE email = ? AND password = ?";
@@ -81,6 +88,8 @@ public class UsuarioDAO {
     return null;
 
   }
+
+  
 
 
   /* ************************************************ METODOS PRIVADOS ************************************************ */
