@@ -19,12 +19,12 @@ Dentro de la carpeta de data/ se encuentra la secuencia de comandos `data.sql`, 
 ### Paquetes
 
 - dao: Implementa las interfaces para el crud
-- interfaces: Regla las clases para ser implementadas por el DAO
+- interfaces: Regla las clases para ser implementadas por el DAO (X)
 - modelo: Las entidades que tienen contacto directo con la base de datos
 - procesaconexion: La conexion con la base de datos
 - servlets: Gestionan las peticiones Http
 - filters: Las clases para restringir el acceso a ciertas vistas dependiendo del estado del usuario
-- util: Clases utilitarias generales
+- util: Clases utilitarias generales (X)
 
 ### Flujo de accion
   1. Crear la logica de lectura del horoscopo (Listo)
@@ -37,9 +37,9 @@ Dentro de la carpeta de data/ se encuentra la secuencia de comandos `data.sql`, 
  
       2.3. Hacer que el filter funcione (LISTO)
  
-      2.4. Hacer que listar (Buscar funcione) - HACIENDO, ver primero las cosas en el servlet
+      2.4. Hacer que listar (Buscar funcione) - (LISTO)
  
-      2.5. Hacer que editar y eliminar funcionen
+      2.5. Hacer que editar y eliminar funcionen (LISTO)
  
 
 ### Sistema de mensajeria

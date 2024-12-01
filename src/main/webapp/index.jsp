@@ -17,11 +17,11 @@
             <c:if test="${not empty sessionScope.current_user}">
                 <div class="mt-5 mb-5 col-12" id="index-menu">
                     <nav class="nav nav-pills nav-fill gap-3 w-100">
-                        <a class="nav-link py-4 display-5" href="/FinalDrilling_m5_Erick_Rivera/horoscopo">Ver tu animal</a>
-                        <a class="nav-link py-4 display-5" href="searchUsers.jsp">Buscar usuarios</a>
-                        <a class="nav-link py-4 display-5" href="/FinalDrilling_m5_Erick_Rivera/users?accion=list">Listar usuarios</a>
-                        <a class="nav-link py-4 display-5" href="edituser.jsp">Modificar datos</a>
-                        <a class="nav-link py-4 display-5" href="javascript: deleteAccount()">Eliminar cuenta</a>
+                        <a class="nav-link py-4 display-5 active" href="/FinalDrilling_m5_Erick_Rivera/horoscopo"><i class="fa-solid fa-yin-yang"></i> Ver tu animal</a>
+                        <a class="nav-link py-4 display-5" href="searchUsers.jsp"><i class="fa-solid fa-magnifying-glass"></i> Buscar usuarios</a>
+                        <a class="nav-link py-4 display-5" href="/FinalDrilling_m5_Erick_Rivera/users?accion=list"><i class="fa-solid fa-list"></i> Listar usuarios</a>
+                        <a class="nav-link py-4 display-5" href="edituser.jsp"><i class="fa-solid fa-pen-to-square"></i> Modificar datos</a>
+                        <a class="nav-link py-4 display-5" href="javascript: deleteAccount()"><i class="fa-solid fa-xmark"></i> Eliminar cuenta</a>
                     </nav>
                     <form name="deleteForm" action="/FinalDrilling_m5_Erick_Rivera/users?accion=delete" method="POST" style="display: none;">
                         <input type="hidden" name="userId" value="${current_user.id}" />

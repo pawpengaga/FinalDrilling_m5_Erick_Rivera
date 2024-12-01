@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.pawpengaga.modelo.Horoscopo;
-import com.pawpengaga.procesaconexion.DatabaseConnection;
 import com.pawpengaga.procesaconexion.PoolConexiones;
 
 public class HoroscopoDAO {

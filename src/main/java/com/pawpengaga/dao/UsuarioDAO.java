@@ -9,12 +9,9 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.xml.crypto.Data;
-
 import com.pawpengaga.modelo.Horoscopo;
 import com.pawpengaga.modelo.Usuario;
 import com.pawpengaga.modelo.ZodiacoEnum;
-import com.pawpengaga.procesaconexion.DatabaseConnection;
 import com.pawpengaga.procesaconexion.PoolConexiones;
 
 public class UsuarioDAO {
@@ -182,24 +179,43 @@ public class UsuarioDAO {
   }
 
   /**
-   * Updatea un usuario y devuelve un valor booleando dependiendo de su tuvo exito o no
+   * Updatea un usuario y devuelve un valor booleando dependiendo de su tuvo exito o no. Puede manejar distintos escenarios en la edicion
    * @param user Un objeto usuario construido desde el formulario
+   * @param currentPassword La contraseña actual del usuario con fines de comparacion de seguridad
    * @return
    */
-  public boolean updateUser(Usuario user){
+  public boolean updateUser(Usuario user, String currentPassword){
 
-    String sql = "UPDATE usuarios SET nombre=?, username=?, email=?, fecha_nacimiento=?, password=?, animal=? WHERE id=?";
+    String sql;
+
+    if (user.getPassword() == null || user.getPassword().isEmpty()) {
+      // Caso 1: Contrasenia vacia
+      sql = "UPDATE usuarios SET nombre=?, username=?, email=?, fecha_nacimiento=?, animal=? WHERE id=? AND password=?";
+    } else {
+      // Caso 2: Contrasenia suplementada
+      sql = "UPDATE usuarios SET nombre=?, username=?, email=?, fecha_nacimiento=?, password=?, animal=? WHERE id=? AND password=?";
+    }
 
     try(Connection conn = PoolConexiones.getDataSource().getConnection();
     PreparedStatement stmt = conn.prepareStatement(sql)) {
 
       stmt.setString(1, user.getNombre());
-      stmt.setString(2, user.getNombre());
+      stmt.setString(2, user.getUsername());
       stmt.setString(3, user.getEmail());
       stmt.setDate(4, java.sql.Date.valueOf(user.getFecha_nacimiento()));
-      stmt.setString(5, user.getPassword());
-      stmt.setString(6, registroAnimal(user.getFecha_nacimiento()));
-      stmt.setInt(7, user.getId()); // Debe conseguirse con un hidden al current user
+
+      if (user.getPassword() == null || user.getPassword().isEmpty()) {
+        // Caso 1: Contrasenia vacia
+        stmt.setString(5, registroAnimal(user.getFecha_nacimiento()));
+        stmt.setInt(6, user.getId());
+        stmt.setString(7, currentPassword);
+    } else {
+        // Caso 2: Contrasenia suplementada
+        stmt.setString(5, user.getPassword());
+        stmt.setString(6, registroAnimal(user.getFecha_nacimiento()));
+        stmt.setInt(7, user.getId());
+        stmt.setString(8, currentPassword);
+    }
 
       if (stmt.executeUpdate() > 0) {
         System.out.println("Usuario actualizado con exito");

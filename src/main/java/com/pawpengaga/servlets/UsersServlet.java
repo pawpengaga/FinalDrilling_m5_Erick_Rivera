@@ -73,6 +73,8 @@ public class UsersServlet extends HttpServlet {
 				e.printStackTrace();
 			}
 
+		} else {
+			response.sendRedirect("index.jsp");
 		}
 	}
 
@@ -132,23 +134,26 @@ public class UsersServlet extends HttpServlet {
 			String username = request.getParameter("username");
 			String email = request.getParameter("email");
 			LocalDate fechaNacimiento = LocalDate.parse(request.getParameter("fecha_nacimiento"));
-			String password = request.getParameter("password");
+
+			String newPassword = request.getParameter("password");
+			String currentPassword = request.getParameter("currentPassword");
 
 			try {
 
-				Usuario tempUser = new Usuario(nombre, username, email, fechaNacimiento, password);
+				Usuario tempUser = new Usuario(nombre, username, email, fechaNacimiento, newPassword);
 				tempUser.setId(userId);
 
-				if (usuarioDAO.updateUser(tempUser)) {
+				if (usuarioDAO.updateUser(tempUser, currentPassword)) {
 					HttpSession session = request.getSession(false);
 					session.removeAttribute("current_user");
 					session.invalidate();
 					request.setAttribute("message", "Usuario actualizado! Vuelva a iniciar sesion para ver los cambios.");
 					request.getRequestDispatcher("login.jsp").forward(request, response);
 				} else {
-				request.setAttribute("message", "Hubo un error al hacer la actualizacion...");
-				}
+				request.setAttribute("message", "Hubo un error al hacer la actualizacion... intente nuevamente.");
 				request.getRequestDispatcher("edituser.jsp").forward(request, response);
+				}
+				
 				} catch (Exception e) {
 					e.printStackTrace();
 			}
@@ -176,6 +181,9 @@ public class UsersServlet extends HttpServlet {
 				request.getRequestDispatcher("index.jsp").forward(request, response);
 			}
 
+		} else {
+			request.setAttribute("message", "Ha ocurrido algo extraño...");
+			request.getRequestDispatcher("index.jsp").forward(request, response);
 		}
 
 	}

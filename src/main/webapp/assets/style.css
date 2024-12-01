@@ -29,9 +29,14 @@ table td {
   background-color: #d1310017;
 }
 
+.nav-fill .active {
+  transition: all .15s ease-in-out,box-shadow .15s ease-in-out;
+  background-color: #D13100 !important;
+}
+
 .nav-fill .active:hover {
   transition: all .15s ease-in-out,box-shadow .15s ease-in-out;
-  background-color: #ec3e09;
+  background-color: #ec3e09 !important;
 }
 
 #index-menu{
@@ -67,3 +72,6 @@ table td {
   background-color: #cf3b0e !important;
 }
 
+.w-fit{
+	width: fit-content;
+}
