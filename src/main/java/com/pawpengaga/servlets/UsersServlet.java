@@ -100,7 +100,7 @@ public class UsersServlet extends HttpServlet {
 				} else {
 				request.setAttribute("message", "Hubo un error al registrar el usuario...");
 				}
-				request.getRequestDispatcher("signup.jsp").forward(request, response);
+				request.getRequestDispatcher("login.jsp").forward(request, response);
 				} catch (Exception e) {
 					e.printStackTrace();
 			}

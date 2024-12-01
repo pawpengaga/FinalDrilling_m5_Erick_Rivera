@@ -41,7 +41,7 @@
                 <button type="submit" class="btn btn-primary">Registrarse</button>
             </div>
             <div>
-                <p>¿Ya tienes una cuenta? Haz clic <a href="login.jsp">aquí</a></p>
+                <p>¿Ya tienes una cuenta? Haz clic <a href="login.jsp" class="mylink">aquí</a></p>
             </div>
         </form>
     </div>
