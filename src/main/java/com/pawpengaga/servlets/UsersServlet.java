@@ -9,6 +9,7 @@ import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.List;
 
 import com.pawpengaga.dao.UsuarioDAO;
 import com.pawpengaga.modelo.Usuario;
@@ -39,7 +40,26 @@ public class UsersServlet extends HttpServlet {
 		if ("list".equals(accion)) {
 			// TODO: Aqui va la lista de usuarios
 		} else if ("search".equals(accion)){
-			// TODO: Aqui va la busqueda de usuarios
+			System.out.println("entramos");
+			String query = request.getParameter("myquery");
+			
+			try {
+				List<Usuario> searchResults = usuarioDAO.getUserByName(query);
+				
+				if(searchResults.size() > 0){
+					System.out.println("El tamano de la lista POSITIVO ES " + searchResults.size());
+					request.setAttribute("usuarios", searchResults);
+					request.getRequestDispatcher("searchUsers.jsp").forward(request, response);
+				} else {
+					System.out.println("El tamano de la lista NEGATIVO ES " + searchResults.size());
+					request.setAttribute("message", "No se han encontrado resultados...");
+					request.getRequestDispatcher("searchUsers.jsp").forward(request, response);
+				}
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
 		}
 	}
 

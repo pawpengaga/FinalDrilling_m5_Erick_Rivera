@@ -18,7 +18,7 @@
                 <div class="mt-5 mb-5 col-12" id="index-menu">
                     <nav class="nav nav-pills nav-fill gap-3 w-100">
                         <a class="nav-link py-4 display-5" href="/FinalDrilling_m5_Erick_Rivera/horoscopo">Ver tu animal</a>
-                        <a class="nav-link py-4 display-5" href="#">Buscar usuarios</a>
+                        <a class="nav-link py-4 display-5" href="searchUsers.jsp">Buscar usuarios</a>
                         <a class="nav-link py-4 display-5" href="#">Listar usuarios</a>
                         <a class="nav-link py-4 display-5" href="#">Modificar datos</a>
                         <a class="nav-link py-4 display-5" href="javascript: deleteAccount()">Eliminar cuenta</a>

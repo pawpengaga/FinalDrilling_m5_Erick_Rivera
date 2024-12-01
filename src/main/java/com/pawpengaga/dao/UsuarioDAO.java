@@ -15,6 +15,7 @@ import com.pawpengaga.modelo.Horoscopo;
 import com.pawpengaga.modelo.Usuario;
 import com.pawpengaga.modelo.ZodiacoEnum;
 import com.pawpengaga.procesaconexion.DatabaseConnection;
+import com.pawpengaga.procesaconexion.PoolConexiones;
 
 public class UsuarioDAO {
 
@@ -150,9 +151,10 @@ public class UsuarioDAO {
     String sql = "SELECT * FROM usuarios WHERE LOWER(nombre) LIKE ? ORDER BY id";
     List<Usuario> matchSet = new ArrayList<>(); // Lista para guardar las coincidencias
 
-    try(Connection conn = DatabaseConnection.getConnection();
-    PreparedStatement stmt = conn.prepareStatement(sql)) {
+    try {
 
+      Connection conn = PoolConexiones.getDataSource().getConnection();
+      PreparedStatement stmt = conn.prepareStatement(sql);
       stmt.setString(1, "%" + searchQuery.toLowerCase() + "%");
       ResultSet rs = stmt.executeQuery();
 
@@ -171,6 +173,7 @@ public class UsuarioDAO {
       // conn.close();
       // stmt.close();
     } catch (Exception e){
+      System.err.println("Ha ocurrido una excepcion" + e.getMessage());
       e.printStackTrace();
     }
 
