@@ -8,6 +8,7 @@ import java.util.List;
 
 import com.pawpengaga.modelo.Horoscopo;
 import com.pawpengaga.procesaconexion.DatabaseConnection;
+import com.pawpengaga.procesaconexion.PoolConexiones;
 
 public class HoroscopoDAO {
 
@@ -17,7 +18,7 @@ public class HoroscopoDAO {
 
     String sql = "SELECT * FROM horoscopo";
 
-    try(Connection conn = DatabaseConnection.getConnection();
+    try(Connection conn = PoolConexiones.getDataSource().getConnection();
     Statement stmt = conn.createStatement()){
       
       ResultSet rs = stmt.executeQuery(sql);

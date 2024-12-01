@@ -125,6 +125,34 @@ public class UsersServlet extends HttpServlet {
 				request.getRequestDispatcher("login.jsp").forward(request, response);
 			}
 
+		} else if ("edit".equals(accion)) {
+
+			int userId = Integer.parseInt(request.getParameter("userId"));
+			String nombre = request.getParameter("nombre");
+			String username = request.getParameter("username");
+			String email = request.getParameter("email");
+			LocalDate fechaNacimiento = LocalDate.parse(request.getParameter("fecha_nacimiento"));
+			String password = request.getParameter("password");
+
+			try {
+
+				Usuario tempUser = new Usuario(nombre, username, email, fechaNacimiento, password);
+				tempUser.setId(userId);
+
+				if (usuarioDAO.updateUser(tempUser)) {
+					HttpSession session = request.getSession(false);
+					session.removeAttribute("current_user");
+					session.invalidate();
+					request.setAttribute("message", "Usuario actualizado! Vuelva a iniciar sesion para ver los cambios.");
+					request.getRequestDispatcher("login.jsp").forward(request, response);
+				} else {
+				request.setAttribute("message", "Hubo un error al hacer la actualizacion...");
+				}
+				request.getRequestDispatcher("edituser.jsp").forward(request, response);
+				} catch (Exception e) {
+					e.printStackTrace();
+			}
+
 		} else if ("logout".equals(accion)){
 			
 			HttpSession session = request.getSession(false);

@@ -7,6 +7,44 @@
     
     <div class="container mt-5">
         <h1 class="display-3">Editar usuario</h1>
+        <c:if test="${not empty current_user}">
+            <form action="/FinalDrilling_m5_Erick_Rivera/users?accion=edit" method="POST" class="mt-5 d-flex flex-column gap-4">
+                <!-- COLUMNA 0 -->
+                <input type="hidden" name="userId" id="userId" value="${current_user.id}" />
+                <!-- COLUMNA 1 -->
+                <div class="col-12 mx-auto d-flex flex-row gap-4">
+                    <div class="w-100">
+                        <label for="nombre" class="form-label fw-bold">Nombre</label>
+                        <input type="text" name="nombre" id="nombre" placeholder="Nombre completo" class="form-control" value="${current_user.nombre}" required />
+                    </div>
+                    <div class="w-100">
+                        <label for="username" class="form-label fw-bold">Nombre de usuario</label>
+                        <label for="username" class="form-label input-group">
+                            <span class="input-group-text">@</span>
+                            <input type="text" name="username" id="username" class="form-control" value="${current_user.username}" required />
+                        </label>
+                    </div>
+                    <div class="w-100">
+                        <label for="email" class="form-label fw-bold">Email</label>
+                        <input type="email" name="email" id="email" placeholder="ejemplo@mail.com" class="form-control" value="${current_user.email}" required />
+                    </div>
+                </div>
+                <!-- COLUMNA 2 -->
+                <div class="col-12 mx-auto d-flex flex-row gap-4">
+                    <div class="w-100">
+                        <label for="fecha_nacimiento" class="form-label fw-bold">Fecha de nacimiento</label>
+                        <input type="date" name="fecha_nacimiento" id="fecha_nacimiento" class="form-control" value="${current_user.fecha_nacimiento}" required />
+                    </div>
+                    <div class="w-100">
+                        <label for="password" class="form-label fw-bold">Contraseña</label>
+                        <input type="password" name="password" id="password" class="form-control" value="${current_user.password}" required />
+                    </div>
+                </div>
+                <div>
+                    <button type="submit" class="btn btn-primary">Editar registro</button>
+                </div>
+            </form>
+        </c:if>
     </div>
     
     <%@ include file="components/footer.jsp" %>

@@ -19,7 +19,7 @@ import java.io.IOException;
  */
 @WebFilter(urlPatterns = {
 	"/yourHoroscope.jsp",
-	"/editUser.jsp",
+	"/edituser.jsp",
 	"/searchUsers.jsp",
 	"/listUsers.jsp",
 	"/horoscopo"
