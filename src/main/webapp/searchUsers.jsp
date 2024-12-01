@@ -16,6 +16,7 @@
                     <input type="text" name="myquery" id="myquery" class="form-control" placeholder="Buscar usuarios por nombre..." oninput="realTimeSearch()" />
                 </form>
             </div>
+            <a href="index.jsp" class="mylink mt-2">Volver al inicio</a>
             <div id="rts-results" class="col-12 mt-4">
                 <c:if test="${not empty usuarios}">
                     <table class="table striped-table w-100">

@@ -38,23 +38,36 @@ public class UsersServlet extends HttpServlet {
 		String accion = request.getParameter("accion");
 		
 		if ("list".equals(accion)) {
-			// TODO: Aqui va la lista de usuarios
+
+			try {
+				
+				List<Usuario> searchResults = usuarioDAO.getAllUsuarios();
+
+				if (searchResults.size() > 0) {
+					request.setAttribute("usuarios", searchResults);
+					request.getRequestDispatcher("listUsers.jsp").forward(request, response);
+				} else {
+					request.setAttribute("message", "No tenemos registros de usuarios al parecer...");
+					request.getRequestDispatcher("login.jsp").forward(request, response); // Broma cibernetica
+				}
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
 		} else if ("search".equals(accion)){
-			System.out.println("entramos");
 			String query = request.getParameter("myquery");
 			
 			try {
 				List<Usuario> searchResults = usuarioDAO.getUserByName(query);
 				
 				if(searchResults.size() > 0){
-					System.out.println("El tamano de la lista POSITIVO ES " + searchResults.size());
 					request.setAttribute("usuarios", searchResults);
-					request.getRequestDispatcher("searchUsers.jsp").forward(request, response);
 				} else {
-					System.out.println("El tamano de la lista NEGATIVO ES " + searchResults.size());
 					request.setAttribute("message", "No se han encontrado resultados...");
-					request.getRequestDispatcher("searchUsers.jsp").forward(request, response);
 				}
+
+				request.getRequestDispatcher("searchUsers.jsp").forward(request, response);
 
 			} catch (Exception e) {
 				e.printStackTrace();

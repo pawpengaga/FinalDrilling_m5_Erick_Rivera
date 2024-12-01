@@ -29,7 +29,7 @@ public class UsuarioDAO {
 
     String sql = "INSERT INTO usuarios(nombre, username, email, fecha_nacimiento, password, animal) VALUES (?, ?, ?, ?, ?, ?)";    
 
-    try (Connection conn = DatabaseConnection.getConnection();
+    try (Connection conn = PoolConexiones.getDataSource().getConnection();
       PreparedStatement stmt = conn.prepareStatement(sql)) {
 
       stmt.setString(1, user.getNombre());
@@ -66,7 +66,7 @@ public class UsuarioDAO {
 
     String sql = "SELECT * FROM usuarios WHERE email = ? AND password = ?";
 
-    try (Connection conn = DatabaseConnection.getConnection();
+    try (Connection conn = PoolConexiones.getDataSource().getConnection();
       PreparedStatement stmt = conn.prepareStatement(sql)) {
 
       stmt.setString(1, correo);
@@ -108,7 +108,7 @@ public class UsuarioDAO {
     String sql = "SELECT * FROM usuarios ORDER BY id";
     List<Usuario> users = new ArrayList<>();
 
-    try (Connection conn = DatabaseConnection.getConnection();
+    try (Connection conn = PoolConexiones.getDataSource().getConnection();
     Statement stmt = conn.createStatement()) {
 
       ResultSet rs = stmt.executeQuery(sql);
@@ -190,7 +190,7 @@ public class UsuarioDAO {
 
     String sql = "UPDATE usuarios SET nombre=?, username=?, email=?, fecha_nacimiento=?, password=?, animal=? WHERE id=?";
 
-    try(Connection conn = DatabaseConnection.getConnection();
+    try(Connection conn = PoolConexiones.getDataSource().getConnection();
     PreparedStatement stmt = conn.prepareStatement(sql)) {
 
       stmt.setString(1, user.getNombre());
@@ -225,7 +225,7 @@ public class UsuarioDAO {
     
     String sql = "DELETE FROM usuarios WHERE id = ?";
 
-    try(Connection conn = DatabaseConnection.getConnection();
+    try(Connection conn = PoolConexiones.getDataSource().getConnection();
     PreparedStatement stmt = conn.prepareStatement(sql)) {
     
       stmt.setInt(1, idUser);
